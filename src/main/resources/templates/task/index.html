@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="grey lighten-2">
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">EpicTask</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active"><a href="/task">pendentes</a></li>
+                <li><a href="#">concluídas</a></li>
+                <li><a href="#">usuários</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <span class="card-panel teal accent-3" th:if="${success}" th:text="${success}"></span>
+        <span class="card-panel red accent-3 white-text" th:if="${error}" th:text="${error}"></span>
+
+        <h2>Tarefas Pendentes</h2>
+
+        <div class="row">
+            <div class="col s12 m6 l4" th:each="task : ${tasks}">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="progress">
+                            <div class="determinate" th:style="${'width:' + task.status + '%'}"></div>
+                        </div>
+                        <span class="card-title" th:text="${task.title}"></span>
+                        <p th:text="${task.description}"></p>
+                        <span data-badge-caption="pontos" class="badge blue white-text" th:text="${task.score}"></span>
+                    </div>
+                    <div class="card-action">
+                        <a th:href="${'/task/delete/' + task.id}" class="btn red">
+                            <i class="material-icons">delete</i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large blue">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>
