@@ -28,7 +28,7 @@
         <h2>Cadastrar Tarefa</h2>
 
         <div class="card">
-            <form class="col s12" action="/task" method="post" th:object="${task}">
+            <form class="col s12" th:action="${'/task'}" method="post" th:object="${task}">
                 <div class="card-content">
                     <div class="row">
                         <div class="input-field col s12">
