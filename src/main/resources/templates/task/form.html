@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body class="grey lighten-2">
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">EpicTask</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active"><a href="/task">pendentes</a></li>
+                <li><a href="#">concluídas</a></li>
+                <li><a href="#">usuários</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <h2>Cadastrar Tarefa</h2>
+
+        <div class="card">
+            <form class="col s12" action="/task" method="post" th:object="${task}">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input th:field="*{title}" type="text" th:classappend="${#fields.hasErrors('title')} ? invalid">
+                            <label for="title">Título</label>
+                            <span class="helper-text red-text" th:errors="*{title}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea class="materialize-textarea" th:field="*{description}" th:classappend="${#fields.hasErrors('description')} ? invalid"></textarea>
+                            <label for="description">Descrição</label>
+                            <span class="helper-text red-text" th:errors="*{description}"></span>
+                        </div>
+                    </div>
+                    <label for="score">Pontos</label>
+                    <p class="range-field">
+                        <input th:field="*{score}" type="range" min="1" max="100" />
+                        <span class="helper-text red-text" th:errors="*{score}"></span>
+                    </p>
+                </div>
+                <div class="card-action right-align">
+                    <a href="/task">cancelar</a>
+                    <button class="btn">cadastrar</button>
+                </div>
+
+            </form>
+        </div>
+
+
+
+    </main>
+
+
+</body>
+
+</html>
