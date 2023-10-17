@@ -7,7 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="grey lighten-2">
@@ -20,7 +21,17 @@
                 <li><a href="#">concluídas</a></li>
                 <li><a href="#">usuários</a></li>
                 <li>
-                    <img class="avatar" th:src="${avatar_url}" alt="">
+                    <!-- Dropdown Trigger -->
+                    <a class='dropdown-trigger' href='#' data-target='dropdown1'>
+                        <img class="avatar" th:src="${avatar_url}" alt="">
+                    </a>
+
+                    <!-- Dropdown Structure -->
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><span th:text="${username}"></span></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li><a href="/logout"><i class="material-icons">logout</i>sair</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -62,5 +73,16 @@
 
 
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        const options = {
+            coverTrigger: false,
+            constrainWidth: false
+        }
+        var instances = M.Dropdown.init(elems, options);
+    });
+</script>
 
 </html>

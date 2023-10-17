@@ -25,6 +25,7 @@ public class TaskController {
     @GetMapping
     public String index(Model model, @AuthenticationPrincipal OAuth2User user){
         model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
+        model.addAttribute("username", user.getAttribute("name"));
         model.addAttribute("tasks", service.findAll());
         return "task/index";
     } 
