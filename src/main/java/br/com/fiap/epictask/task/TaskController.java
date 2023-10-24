@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.fiap.epictask.user.User;
 import jakarta.validation.Valid;
 
 @Controller
@@ -64,9 +65,33 @@ public class TaskController {
         redirect.addFlashAttribute("success", getMessage("task.create.success"));
         return "redirect:/task";
     }
-
+    
     private String getMessage(String code){
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
+    
+    @GetMapping("dec/{id}")
+    public String decrement(@PathVariable Long id){
+        service.decrement(id);
+        return "redirect:/task";
+    }
+
+    @GetMapping("inc/{id}")
+    public String increment(@PathVariable Long id){
+        service.increment(id);
+        return "redirect:/task";
+    }
+    
+    @GetMapping("catch/{id}")
+    public String catchTask(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.catchTask(id, User.convert(user));
+        return "redirect:/task";
+    }
+
+    @GetMapping("drop/{id}")
+    public String dropTask(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.dropTask(id, User.convert(user));
+        return "redirect:/task";
     }
     
 }

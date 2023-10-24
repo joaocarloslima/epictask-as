@@ -47,6 +47,7 @@
             <div class="col s12 m6 l4" th:each="task : ${tasks}">
                 <div class="card">
                     <div class="card-content">
+                        <img th:if="${task.user}" th:src="${task.user.avatarUrl}" alt="" class="avatar">
                         <div class="progress">
                             <div class="determinate" th:style="${'width:' + task.status + '%'}"></div>
                         </div>
@@ -57,6 +58,18 @@
                     <div class="card-action">
                         <a th:href="${'/task/delete/' + task.id}" class="btn red">
                             <i class="material-icons">delete</i>
+                        </a>
+                        <a th:if="${task.status != 0}" th:href="${'/task/dec/' + task.id}" class="btn">
+                            <i class="material-icons">remove</i>
+                        </a>
+                        <a th:if="${task.status != 100}" th:href="${'/task/inc/' + task.id}" class="btn">
+                            <i class="material-icons">add</i>
+                        </a>
+                        <a th:if="${task.user == null}" th:href="${'/task/catch/' + task.id}" class="btn purple" title="pegar tarefa">
+                            <i class="material-icons">pan_tool</i>
+                        </a>
+                        <a th:if="${task.user != null}" th:href="${'/task/drop/' + task.id}" class="btn amber black-text" title="largar tarefa">
+                            <i class="material-icons">do_not_touch</i>
                         </a>
                     </div>
                 </div>
